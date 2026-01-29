@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fungi | Anas Games</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="assets/icon.png" type="image/png">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    :root {
+      --bg-grad: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      --accent1: #ffcc70;
+      --accent2: #c850c0;
+      --text: #f5f5f5;
+      --box-bg: rgba(255, 255, 255, 0.05);
+      --box-hover: rgba(255, 204, 112, 0.15);
+    }
+
+    * { box-sizing: border-box; margin:0; padding:0; }
+    body {
+      background: var(--bg-grad);
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    nav {
+      position: sticky;
+      top: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 8%;
+      background: rgba(15, 12, 41, 0.5);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border-radius: 0 0 20px 20px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+      z-index: 100;
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+
+    nav:hover {
+      background: rgba(20, 18, 50, 0.55);
+      box-shadow: 0 10px 35px rgba(0,0,0,0.4);
+    }
+
+    .nav-brand { display: flex; align-items: center; gap: 12px; }
+    .nav-brand img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
+    .nav-brand span { font-family: 'Rubik', sans-serif; font-weight: 700; font-size: 1.7rem; }
+
+    nav a { text-decoration: none; color: var(--text); font-weight: 500; margin-left: 20px; transition: color 0.3s; }
+    nav a:hover { color: var(--accent1); }
+
+    .hero { min-height: 40vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 50px 10%; }
+    .hero-title { font-family: 'Rubik', sans-serif; font-weight: 700; font-size: clamp(4rem, 10vw, 6rem); background: linear-gradient(90deg, var(--accent1), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px; }
+
+    .section { padding: 50px 8%; max-width: 1000px; margin: auto; display: flex; flex-direction: column; gap: 25px; }
+    .section h2 { font-family: 'Rubik', sans-serif; font-size: 2.2rem; margin-bottom: 20px; text-align: center; }
+
+    .box { background: var(--box-bg); padding: 25px 30px; border-radius: 15px; transition: background 0.3s, transform 0.3s, box-shadow 0.3s; }
+    .box:hover { background: var(--box-hover); transform: translateY(-5px); box-shadow: 0 15px 30px rgba(255, 204, 112, 0.25); }
+
+    .box p, .box ul, .box li { font-size: 1.05rem; line-height: 1.7; }
+    .box ul { margin-left: 20px; list-style: disc; }
+
+    .download-section { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 30px; }
+    .download-btn { display: inline-block; padding: 15px 35px; border-radius: 30px; font-weight: 600; background: linear-gradient(135deg, var(--accent2), var(--accent1)); color: white; text-decoration: none; transition: transform 0.3s, box-shadow 0.3s; }
+    .download-btn:hover { transform: scale(1.05); box-shadow: 0 0 25px var(--accent1); }
+    .download-btn.itchio { background: #fa5c5c; }
+    .download-btn.itchio:hover { box-shadow: 0 0 25px #fa5c5c; }
+
+    footer { text-align: center; padding: 30px; font-size: 0.9rem; opacity: 0.7; }
+
+    /* Screenshots Slider */
+    .screenshot-box { position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+    .slider { width: 100%; max-width: 800px; height: 420px; position: relative; }
+    .slide { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 15px; opacity: 0; transition: opacity 0.5s ease-in-out; }
+    .slide.active { opacity: 1; }
+    .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: var(--box-bg); border: none; color: var(--accent1); font-size: 1.5rem; padding: 12px 15px; border-radius: 50%; cursor: pointer; backdrop-filter: blur(10px); transition: background 0.3s, transform 0.3s; z-index: 2; }
+    .slider-btn:hover { background: var(--box-hover); transform: translateY(-50%) scale(1.1); }
+    .slider-btn.left { left: 15px; }
+    .slider-btn.right { right: 15px; }
+
+    @media(max-width: 600px){
+      .slider { height: 250px; }
+      .box { padding: 20px; }
+      .download-btn { padding: 12px 25px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">
+    <img src="https://lh3.googleusercontent.com/ogw/AF2bZyjqtSvZpmMrcRQaE5ZvwfwMLjPSw6960bZWOJwB0EZ46g=s64-c-mo" alt="A.H Logo">
+    <span>A.H</span>
+  </div>
+  <div>
+    <a href="#download">Download</a>
+    <a href="#how-to-play">How to Play</a>
+    <a href="#screenshots">Screenshots</a>
+    <a href="index.html">Home</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-title">Fungi 1.2</div>
+  <p>Competitive jumping game where survival depends on skill and strategy. Gain Fungus Points, defeat enemies, and climb the leaderboard!</p>
+</div>
+
+<!-- DESCRIPTION -->
+<div class="section">
+  <h2>Description</h2>
+  <div class="box" style="display:flex; align-items:center; gap:20px;">
+    <img src="assets/icon.png" width="150px" alt="Fungi illustration">
+    <p>
+      Fungi is a competitive game where survival depends on jumping over enemies. When you jump on an enemy, you gain Fungus Points. This number appears above your character and represents your health. Enemies also have Fungus Points, and they gain or lose them the same way—by jumping on you or on each other. Rule is simple: The more enemies you jump on, the longer you survive.
+    </p>
+  </div>
+</div>
+
+<!-- HOW TO PLAY -->
+<div class="section" id="how-to-play">
+  <h2>How to Play</h2>
+  <div class="box">
+    <ul>
+      <li>Jumping on enemies increases your Fungus Points.</li>
+      <li>Getting jumped on decreases them.</li>
+      <li>When an enemy’s Fungus Points reach zero, it dies.</li>
+      <li>If your Fungus Points reach zero, you die too.</li>
+      <li>Fungus Points also give you XP.</li>
+      <li>As your XP increases, your level increases.</li>
+      <li>Every new level unlocks new enemies, increases difficulty, decreases spawn time, and increases the number of enemies.</li>
+      <li>If you die, you can revive by paying 5 Gems (keeps your highest Fungus Points and XP).</li>
+      <li>Skins affect your initial health, speed, jump height, and special abilities (double jump, fire, snow, resistance).</li>
+    </ul>
+  </div>
+</div>
+
+<!-- SCREENSHOTS -->
+<div class="section" id="screenshots">
+  <h2>Screenshots</h2>
+  <div class="box screenshot-box">
+    <button class="slider-btn left" onclick="moveSlide(-1)">
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
+    <div class="slider">
+      <img src="assets/1.png" class="slide active">
+      <img src="assets/2.png" class="slide">
+      <img src="assets/3.png" class="slide">
+      <img src="assets/4.png" class="slide">
+      <img src="assets/5.png" class="slide">
+      <img src="assets/6.png" class="slide">
+      <img src="assets/7.png" class="slide">
+    </div>
+    <button class="slider-btn right" onclick="moveSlide(1)">
+      <i class="fa-solid fa-chevron-right"></i>
+    </button>
+  </div>
+</div>
+
+<!-- DOWNLOAD -->
+<div class="section" id="download" style="text-align:center;">
+  <h2>Download</h2>
+  <div class="download-section">
+    <a class="download-btn" href="https://drive.google.com/uc?export=download&id=1Lhg8jLH-wuaugebWGy5aUbbUtTu3VxCz
+" download >Windows</a>
+    <a class="download-btn" href="https://drive.google.com/uc?export=download&id=1IS5M60PhfybLh4mJhkeQnMiJkLDj_Ha0
+"download>Mac</a>
+    <a class="download-btn" href="https://drive.google.com/uc?export=download&id=1Z95jxGKGmtOy6t469ZmrQAMdvIoBr1qb
+"download>Android</a>
+    <a class="download-btn itchio" href="https://anas-h-games.itch.io/fungi" target = "_blank">Itch.io</a>
+  </div>
+</div>
+
+<!-- FINAL NOTE -->
+<div class="section">
+  <h2>Final Note</h2>
+  <div class="box">
+    <p>
+      I hope you enjoy playing Fungi. The biggest support you can give is reporting bugs or glitches. If you find any issue, restart the game and contact me so I can improve it: 
+      <br>Email: <a href="mailto:anashamada1446@gmail.com" style="color:var(--accent1);">anashamada1446@gmail.com</a>
+      <br>Thanks for playing and supporting the game!
+    </p>
+  </div>
+</div>
+
+<footer>© 2025 Anas — Game Developer</footer>
+
+<!-- FIXED SLIDER SCRIPT -->
+<script>
+  let currentSlide = 0;
+  let slides = [];
+
+  document.addEventListener("DOMContentLoaded", () => {
+    slides = document.querySelectorAll(".slide");
+  });
+
+  function moveSlide(dir) {
+    if (!slides || slides.length === 0) return;
+    slides[currentSlide].classList.remove("active");
+    currentSlide = (currentSlide + dir + slides.length) % slides.length;
+    slides[currentSlide].classList.add("active");
+  }
+</script>
+
+</body>
+</html>

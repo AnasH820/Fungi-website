@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Anas | Game Developer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="assets/logo.png" type="image/png">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@700&family=Poppins:wght@300;400;600&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+<style>
+:root {
+  --bg-grad: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  --accent1: #ffcc70;
+  --accent2: #c850c0;
+  --text: #f5f5f5;
+  --dark-card: #1a1a2e;
+}
+
+* { box-sizing: border-box; margin:0; padding:0; }
+
+body {
+  background: var(--bg-grad);
+  color: var(--text);
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
+}
+
+/* ================= NAV ================= */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 8%;
+  
+  /* Gradient instead of a flat color */
+  background: linear-gradient(
+    to right, 
+    rgba(15, 12, 41, 0.9), 
+    rgba(15, 12, 41, 0.6)
+  );
+
+  backdrop-filter: blur(12px);
+}
+
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-brand img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 15px rgba(255,204,112,0.6);
+}
+
+.nav-brand span {
+  font-family: 'Rubik', sans-serif;
+  font-weight: 700;
+  font-size: 1.7rem;
+  color: white;
+}
+
+nav ul {
+  display: flex;
+  gap: 25px;
+  list-style: none;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 500;
+}
+
+nav a:hover { color: var(--accent1); }
+
+/* ================= HERO ================= */
+.hero {
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 10%;
+}
+
+.hero-title {
+  font-family: 'Rubik', sans-serif;
+  font-weight: 700;
+  font-size: clamp(5rem, 14vw, 10rem);
+  letter-spacing: 6px;
+  background: linear-gradient(90deg, var(--accent1), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: float 3s ease-in-out infinite;
+}
+
+.hero p {
+  max-width: 650px;
+  margin-top: 25px;
+  font-size: 1.15rem;
+  opacity: 0.9;
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-18px); }
+  100% { transform: translateY(0); }
+}
+
+/* ================= SECTIONS ================= */
+section { padding: 80px 8%; }
+
+section h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+/* ================= CARDS ================= */
+.cards {
+  display: flex;
+  justify-content: center;    /* horizontal center */
+  align-items: flex-end;      /* stick to bottom */
+  perspective: 1200px;        /* 3D perspective for flip */
+  height: 360px;              /* same as card-wrap */
+  margin: 0 auto;
+}
+
+.card-wrap {
+  height: 100%;
+  cursor: pointer;
+}
+
+.card {
+  width: 260px;               /* card width */
+  height: 100%;               /* full height of card-wrap */
+  position: relative;         /* required for absolute faces */
+  transform-style: preserve-3d; /* 3D flip */
+  transition: transform 0.9s cubic-bezier(.4,.2,.2,1);
+}
+
+.card-wrap:hover .card {
+  transform: rotateY(180deg); /* flip on hover */
+}
+
+.card-face {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  backface-visibility: hidden;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.45);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.card-face img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Overlay on top of image */
+.card-overlay {
+  position: absolute;           /* <-- changed from relative */
+  bottom: 0;                    /* stick to bottom */
+  left: 0;
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  z-index: 10;                  /* ensure on top of image */
+  background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
+  border-radius: 0 0 20px 20px; /* optional: match bottom corners */
+}
+
+
+
+
+.front h3, .back h3 {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.6rem;
+  color: white;
+  margin: 0;
+}
+
+.back { transform: rotateY(180deg); }
+
+.tag {
+  margin-top: 8px;
+  display: inline-block;
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.15);
+  color: white;
+}
+
+/* ================= CONTACT ================= */
+.contact {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.contact a {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  color: white;
+  background: linear-gradient(135deg, var(--accent2), var(--accent1));
+  transition: transform 0.3s, box-shadow 0.3s;
+  text-decoration: none;
+}
+
+.contact a:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 25px var(--accent1);
+}
+
+footer {
+  text-align: center;
+  padding: 30px;
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 600px) {
+  nav ul { gap: 15px; }
+  .card-wrap { height: 300px; }
+}
+</style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-brand">
+      <img src="assets/logo.png" alt="A.H Logo">
+      <span>A.H</span>
+    </div>
+
+    <ul>
+      <li><a href="#works">Works</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-title">A.H</div>
+    <p>
+      I’m Anas, an indie game developer crafting competitive, creative and story-driven games
+      with strong mechanics, polish, and personality.
+    </p>
+  </div>
+
+  <!-- WORKS -->
+  <section id="works">
+    <h2>My Games</h2>
+
+    <div class="cards">
+
+      <!-- FUNGI -->
+      <div class="card-wrap" onclick="window.location.href='fungi.html'">
+        <div class="card">
+          <div class="card-face front">
+            <img src="assets/fungi_front.png" alt="Fungi">
+            <div class="card-overlay"><h3>Fungi</h3></div>
+          </div>
+          <div class="card-face back">
+            <img src="assets/fungi_back.png" alt="Fungi details">
+            <div class="card-overlay">
+              <h3>Fungi</h3>
+              <div class="tag">Published</div>
+              <div class="tag">AR / EN</div>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+  <!-- CONTACT -->
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <div class="contact">
+      <a href="https://discord.gg/vA33QmKr" target = "_blank"><i class="fab fa-discord"></i></a>
+      <a href="mailto:anashamada1446@gmail.com" target = "_blank"><i class="fas fa-envelope"></i></a>
+    </div>
+  </section>
+
+  <footer>© 2025 Anas — Game Developer</footer>
+
+</body>
+</html>
